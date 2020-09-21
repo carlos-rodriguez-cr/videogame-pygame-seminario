@@ -1,19 +1,23 @@
 import pygame
 
+
 SCREEN_HEIGHT = 720
 SCREEN_WIDTH = 1280
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 
-
-
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
+
         self.image = pygame.image.load("images/player.png").convert()
+
         self.image.set_colorkey(BLACK)
-        self.rect = self.image.get_rect()  # Posicionar sprite
+        self.rect = self.image.get_rect()   # Posicionar sprite
+        self.rect.x = int(SCREEN_WIDTH/2)   # Centro de pantalla eje x
+        self.rect.y = int(SCREEN_HEIGHT/2)  # Centro de pantalla eje y
+
         self.speed_x = 0
         self.speed_y = 0
 
@@ -53,12 +57,16 @@ class Game(object):
             if event.type == pygame.KEYDOWN: #apretar tecla
                 if event.key == pygame.K_LEFT:
                     self.player.changespeedx(-3)
+
                 if event.key == pygame.K_RIGHT:
                     self.player.changespeedx(3)
+
                 if event.key == pygame.K_UP:
                     self.player.changespeedy(-3)
+
                 if event.key == pygame.K_DOWN:
                     self.player.changespeedy(3)
+
 
             if event.type == pygame.KEYUP: #soltar tecla
                 if event.key == pygame.K_LEFT:
@@ -96,6 +104,7 @@ def main():  # Clase principal
     screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
     done = False
     clock = pygame.time.Clock()
+    pygame.display.set_caption("Nombre del juego")
     game = Game()  # Reiniciar juego
 
     while not done:
@@ -106,5 +115,5 @@ def main():  # Clase principal
     pygame.quit()
 
 
-if __name__ == "__main__": #Llama a la clase principal
+if __name__ == "__main__": #Llama a la funcion principal
     main()
